@@ -1,0 +1,14 @@
+keys:
+  # Users
+  users: &users
+    - &jocelyn 00E063D5E30126C1A3DF114E77B3416DE9D092BD
+  # Hosts
+  hosts: &hosts
+    - &rababou age1mdwc4465nsvlhckx66aue3xp6hax7veawcfe343ympqg4mz9ue3q3pnvx4
+
+creation_rules:
+  - path_regex: secrets/rababou/secrets.ya?ml$
+    key_groups:
+      - age:
+          - *rababou
+        pgp: *users

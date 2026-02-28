@@ -1,21 +1,16 @@
 {
-  description = "NixOS configuration";
+  description = "NixOS configuration - Colmena First (rababou)";
 
   inputs = {
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils-plus = {
-      url = "github:gytis-ivaskevicius/flake-utils-plus/v1.5.1";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
@@ -29,7 +24,7 @@
     };
 
     disko = {
-      url = "github:nix-community/disko/latest";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -42,94 +37,58 @@
   outputs =
     inputs@{
       self,
-      nixpkgs,
-      nixpkgs-unstable,
-      nixpkgs-master,
-      home-manager,
-      sops-nix,
-      nix-index-database,
-      disko,
-      colmena,
       flake-utils-plus,
+      colmena,
       ...
     }:
     let
-      commonModules = [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        nix-index-database.nixosModules.default
-        disko.nixosModules.disko
-        ./modules
-      ];
+      system = "x86_64-linux";
 
-      mkHostSpecialArgs = system: {
-        pkgs-unstable = self.pkgs.${system}.unstable;
-        pkgs-master = self.pkgs.${system}.master;
-      };
+      baseFlake = flake-utils-plus.lib.mkFlake {
+        inherit self inputs;
+        supportedSystems = [ system ];
+        channelsConfig.allowUnfree = true;
+        channels = {
+          nixpkgs.input = inputs.nixpkgs;
+          unstable.input = inputs.nixpkgs-unstable;
+          master.input = inputs.nixpkgs-master;
+        };
 
-      colmenaSystem = "x86_64-linux";
-      mkColmenaSpecialArgs = system: {
-        pkgs-unstable = self.pkgs.${system}.unstable;
-        pkgs-master = self.pkgs.${system}.master;
+        outputsBuilder = channels: {
+          formatter = channels.nixpkgs.nixfmt-tree;
+        };
       };
     in
-    flake-utils-plus.lib.mkFlake {
-      inherit self inputs;
-
-      supportedSystems = [
-        "x86_64-linux"
-      ];
-
-      channelsConfig.allowUnfree = true;
-
-      channels = {
-        nixpkgs.input = nixpkgs;
-        unstable.input = nixpkgs-unstable;
-        master.input = nixpkgs-master;
-      };
-
-      hostDefaults = {
-        modules = commonModules;
-      };
-
-      outputsBuilder =
-        channels:
-        let
-          pkgs = channels.nixpkgs;
-        in
-        {
-          formatter = pkgs.nixfmt-tree;
-        };
-
-      hosts = {
-        rababou = {
-          modules = [
-            ./machines/rababou
-          ];
-          specialArgs = mkHostSpecialArgs "x86_64-linux";
-        };
-      };
-    }
+    baseFlake
     // {
       colmenaHive = colmena.lib.makeHive {
         meta = {
-          inherit (self.pkgs.${colmenaSystem}) nixpkgs;
+          inherit (self.pkgs.${system}) nixpkgs;
+
+          specialArgs = {
+            pkgs-unstable = self.pkgs.${system}.unstable;
+            pkgs-master = self.pkgs.${system}.master;
+            inherit inputs;
+          };
         };
 
         defaults = {
-          _module.args = mkColmenaSpecialArgs colmenaSystem;
-          imports = commonModules;
+          imports = [
+            inputs.sops-nix.nixosModules.sops
+            inputs.home-manager.nixosModules.home-manager
+            inputs.nix-index-database.nixosModules.default
+            inputs.disko.nixosModules.disko
+            ./modules
+          ];
+          deployment.targetUser = null;
         };
 
         rababou = {
-          imports = [
-            ./machines/rababou
-          ];
-          deployment = {
-            # use user in ssh config
-            targetUser = null;
-          };
+          imports = [ ./machines/rababou ];
         };
       };
+
+      # Export Colmena nodes to standard nixosConfigurations
+      nixosConfigurations = self.colmenaHive.nodes;
     };
 }

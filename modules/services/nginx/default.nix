@@ -22,10 +22,10 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       appendConfig = ''
-        error_log /dev/stderr warn;
+        error_log syslog:server=unix:/dev/log warn;
       '';
       appendHttpConfig = ''
-        access_log /dev/stdout combined;
+        access_log syslog:server=unix:/dev/log combined;
       '';
       virtualHosts."rababou.ch" = {
         forceSSL = true;

@@ -95,6 +95,7 @@
             '';
             root = pkgs.cinny.override {
               conf = {
+                defaultHomeserver = 0;
                 homeserverList = [
                   "rababou.ch"
                 ];

@@ -33,7 +33,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    colmena.url = "github:zhaofengli/colmena";
+    colmena = {
+      url = "github:zhaofengli/colmena/v0.4.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

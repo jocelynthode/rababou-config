@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ./cli
     ./filesystems
     ./shell
     ./network

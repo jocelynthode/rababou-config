@@ -125,6 +125,10 @@
           imports = [
             ./machines/rababou
           ];
+          deployment = {
+            # use user in ssh config
+            targetUser = null;
+          };
         };
       };
     };

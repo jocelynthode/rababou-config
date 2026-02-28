@@ -6,6 +6,7 @@
     ssh-to-age
     disko
     nixos-anywhere
+    colmena
   ];
 
   languages.nix.enable = true;

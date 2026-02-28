@@ -4,5 +4,6 @@
     ./base
     ./development
     ./services
+    ./users
   ];
 }

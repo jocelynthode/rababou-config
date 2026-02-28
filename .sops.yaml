@@ -2,6 +2,7 @@ keys:
   # Users
   users: &users
     - &jocelyn 00E063D5E30126C1A3DF114E77B3416DE9D092BD
+    - &simon age1j2xynq5xq8mzrrxev5pw2g8k3zxhwqjm0e2dflvakzez4hwueqrq7tjp22
   # Hosts
   hosts: &hosts
     - &rababou age1mdwc4465nsvlhckx66aue3xp6hax7veawcfe343ympqg4mz9ue3q3pnvx4
@@ -11,4 +12,6 @@ creation_rules:
     key_groups:
       - age:
           - *rababou
-        pgp: *users
+          - *simon
+        pgp:
+          - *jocelyn

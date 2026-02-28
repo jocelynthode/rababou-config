@@ -2,6 +2,8 @@
 inputs:
   nixpkgs:
     url: github:NixOS/nixpkgs/nixos-25.11
+  colmena:
+    url: github:zhaofengli/colmena
 # If you're using non-OSS software, you can set allowUnfree to true.
 # allowUnfree: true
 

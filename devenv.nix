@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   packages = with pkgs; [
     git
@@ -6,7 +6,7 @@
     ssh-to-age
     disko
     nixos-anywhere
-    colmena
+    inputs.colmena.packages.${pkgs.system}.colmena
   ];
 
   languages.nix.enable = true;

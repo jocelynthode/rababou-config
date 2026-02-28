@@ -21,7 +21,6 @@
       acceptTerms = true;
       defaults = {
         email = "admin@rababou.ch";
-        server = "https://acme-staging-v02.api.letsencrypt.org/directory";
         webroot = "/var/lib/acme/acme-challenge"; # port 80 already opened in media/nginx
       };
       certs = {

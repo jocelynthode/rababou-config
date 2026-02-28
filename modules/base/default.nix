@@ -75,6 +75,7 @@
           lsof
           rsync
           unzip
+          net-tools
         ];
       };
 

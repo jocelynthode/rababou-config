@@ -11,6 +11,7 @@
     ./network
     ./nix
     ./sshd
+    ./sudo
   ];
 
   options.aspects = {

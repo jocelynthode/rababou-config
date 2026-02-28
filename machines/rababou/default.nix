@@ -9,6 +9,8 @@
     stateVersion = "25.11";
     allowReboot = true;
     development.containers.enable = true;
-    services.enable = true;
+    services = {
+      commafeed.enable = false;
+    };
   };
 }

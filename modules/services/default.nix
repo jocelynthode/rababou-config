@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   ...
 }:
@@ -13,9 +12,7 @@
     ./postgresql
   ];
 
-  options.aspects.services.enable = lib.mkEnableOption "services";
-
-  config = lib.mkIf config.aspects.services.enable {
+  config = {
     aspects = {
       services = {
         commafeed.enable = lib.mkDefault true;

@@ -22,10 +22,10 @@
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
       appendConfig = ''
-        error_log syslog:server=unix:/dev/log warn;
+        error_log syslog:server=unix:/dev/log,tag=nginx warn;
       '';
       appendHttpConfig = ''
-        access_log syslog:server=unix:/dev/log combined;
+        access_log syslog:server=unix:/dev/log,tag=nginx combined;
       '';
       virtualHosts."rababou.ch" = {
         forceSSL = true;

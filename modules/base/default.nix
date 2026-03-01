@@ -114,7 +114,7 @@
               "wheel"
             ];
             openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKjiNw/JewSTMYK8HfhjyagirZt+yskZjdmwGgdY9ktA simon@steg"
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPz9TNeNHnhk6duNRqNbY6KoWnRXmA1xsNz/4EB+MwC0 simon2023"
             ];
           };
           root = {

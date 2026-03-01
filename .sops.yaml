@@ -2,13 +2,13 @@ keys:
   # Users
   users: &users
     - &jocelyn 00E063D5E30126C1A3DF114E77B3416DE9D092BD
-    - &simon age1j2xynq5xq8mzrrxev5pw2g8k3zxhwqjm0e2dflvakzez4hwueqrq7tjp22
+    - &simon age19lkn4ywuvywykpm7rgpg5xmu9pdl8p6xvhy8vv7z3d3rle3u932qpuyj68
   # Hosts
   hosts: &hosts
     - &rababou age1mdwc4465nsvlhckx66aue3xp6hax7veawcfe343ympqg4mz9ue3q3pnvx4
 
 creation_rules:
-  - path_regex: secrets/rababou/secrets.ya?ml$
+  - path_regex: secrets/rababou/secrets.yaml$
     key_groups:
       - age:
           - *rababou

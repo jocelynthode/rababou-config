@@ -6,7 +6,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils-plus = {
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -31,6 +35,7 @@
     colmena = {
       url = "github:zhaofengli/colmena";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 

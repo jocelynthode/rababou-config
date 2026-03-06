@@ -24,10 +24,10 @@
     "devenv": {
       "locked": {
         "dir": "src/modules",
-        "lastModified": 1771938564,
+        "lastModified": 1772793278,
         "owner": "cachix",
         "repo": "devenv",
-        "rev": "145b407afb07ebd9763e8b3b98c1454c10252cd6",
+        "rev": "186d38b25f29680b9109ab4d060b5ddf617e5734",
         "type": "github"
       },
       "original": {
@@ -93,10 +93,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1771858127,
+        "lastModified": 1772665116,
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "49bbbfc218bf3856dfa631cead3b052d78248b83",
+        "rev": "39f53203a8458c330f61cc0759fe243f0ac0d198",
         "type": "github"
       },
       "original": {
@@ -147,10 +147,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771848320,
+        "lastModified": 1772624091,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2fc6539b481e1d2569f25f8799236694180c0993",
+        "rev": "80bdc1e5ce51f56b19791b52b2901187931f5353",
         "type": "github"
       },
       "original": {
@@ -162,10 +162,10 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1772047000,
+        "lastModified": 1772598333,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1267bb4920d0fc06ea916734c11b0bf004bbe17e",
+        "rev": "fabb8c9deee281e50b1065002c9828f2cf7b2239",
         "type": "github"
       },
       "original": {

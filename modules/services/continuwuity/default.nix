@@ -188,13 +188,15 @@
           well_known = {
             client = "https://matrix.rababou.ch";
             server = "matrix.rababou.ch:443";
-            rtc_focus_server_urls = [
+            support_email = "foobar@example.com";
+          };
+          matrix_rtc = {
+            foci = [
               {
                 type = "livekit";
                 livekit_service_url = "https://livekit.rababou.ch";
               }
             ];
-            support_email = "foobar@example.com";
           };
         };
       };

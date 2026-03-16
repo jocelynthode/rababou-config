@@ -95,16 +95,16 @@
             '';
             root = pkgs.cinny.override {
               cinny-unwrapped = pkgs.cinny-unwrapped.overrideAttrs (_old: rec {
-                version = "b050cd01f9ada1f253b0f5f50c6c1eddaf929978";
+                version = "8f1add6059c5efa72232d4bc060c6a5e1acb74e5";
 
                 src = pkgs.fetchFromGitHub {
                   owner = "cinnyapp";
                   repo = "cinny";
                   rev = version;
-                  hash = "sha256-cIalEC13d++3YZoaWVcKzjF1qCyULPVk8ZalC1fSdDM=";
+                  hash = "sha256-adrEoS3XFzsTukn/kUVb6kE3bPefJ8E4hvxoJIDqOpc=";
                 };
 
-                npmDepsHash = "sha256-I+Hz2TYo3PJTcSjTgDKi0Epx4kjYLJI+ZfVDZ21SukU=";
+                npmDepsHash = "sha256-27WFjb08p09aJRi0S2PvYq3bivEuG5+z2QhFahTSj4Q=";
 
                 # Re-trigger this because overrideAttrs only replaces the final values
                 npmDeps = pkgs.fetchNpmDeps {

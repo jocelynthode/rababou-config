@@ -94,25 +94,6 @@
               try_files $uri $uri/ /index.html;
             '';
             root = pkgs.cinny.override {
-              cinny-unwrapped = pkgs.cinny-unwrapped.overrideAttrs (_old: rec {
-                version = "341fedd9321f44675a0394e61684263ee443bee1";
-
-                src = pkgs.fetchFromGitHub {
-                  owner = "cinnyapp";
-                  repo = "cinny";
-                  rev = version;
-                  hash = "sha256-wfhBJ8pu1v5PcVT2i2OZFKlO47BLsBEO/N/ai04WA1w=";
-                };
-
-                npmDepsHash = "sha256-MTx0MoXa4+sWagrUDMWzEK2ofRqcZHbSyPiO3PGz+JM=";
-
-                # Re-trigger this because overrideAttrs only replaces the final values
-                npmDeps = pkgs.fetchNpmDeps {
-                  inherit src;
-                  hash = npmDepsHash;
-                };
-              });
-
               conf = {
                 defaultHomeserver = 0;
                 homeserverList = [

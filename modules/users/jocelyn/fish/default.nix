@@ -61,7 +61,7 @@
         };
         nix_shell = {
           symbol = " ";
-          format = "[$symbol$name \\($state\\)]($style) ";
+          format = "[$symbol$name ($state)]($style) ";
         };
         nodejs = {
           format = "[$symbol($version )]($style) ";
@@ -69,7 +69,7 @@
         };
         python = {
           symbol = " ";
-          format = "[\${symbol}\${pyenv_prefix}(\${version} )(\($virtualenv\) )]($style) ";
+          format = "[\${symbol}\${pyenv_prefix}(\${version} )(($virtualenv) )]($style) ";
         };
         status = {
           disabled = false;

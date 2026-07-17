@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }:
 {
@@ -150,6 +151,7 @@
 
       matrix-continuwuity = {
         enable = true;
+        package = pkgs-unstable.matrix-continuwuity;
         settings.global = {
           server_name = "rababou.ch";
           port = [ 6167 ];

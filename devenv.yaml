@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://devenv.sh/devenv.schema.json
 inputs:
   colmena:
     url: github:zhaofengli/colmena
@@ -7,4 +8,4 @@ inputs:
       nixpkgs:
         follows: nixpkgs
   nixpkgs:
-    url: github:NixOS/nixpkgs/nixos-26.05
+    url: github:cachix/devenv-nixpkgs/rolling

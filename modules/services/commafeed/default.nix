@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs-unstable,
   ...
 }:
 {
@@ -24,10 +23,12 @@
 
       commafeed = {
         enable = true;
-        package = pkgs-unstable.commafeed;
         environment = {
           QUARKUS_HTTP_PORT = "8082";
-          QUARKUS_DATASOURCE_JDBC_URL = "jdbc:postgresql:///commafeed?host=/run/postgresql";
+          # See https://github.com/Athou/commafeed/issues/1278#issuecomment-4966021207 for why we cant use unix socket
+          # QUARKUS_DATASOURCE_JDBC_URL = "jdbc:postgresql:///commafeed?host=/run/postgresql";
+          QUARKUS_DATASOURCE_JDBC_URL = "jdbc:postgresql://localhost:5432/commafeed";
+          QUARKUS_DATASOURCE_USERNAME = "commafeed";
           COMMAFEED_FEED_REFRESH_USER_INACTIVITY_PERIOD = "180D";
           COMMAFEED_DATABASE_CLEANUP_ENTRIES_MAX_AGE = "0";
           COMMAFEED_DATABASE_CLEANUP_MAX_FEED_CAPACITY = "0";

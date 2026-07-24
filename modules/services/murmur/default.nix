@@ -35,8 +35,11 @@
         logDays = 31;
         imgMsgLength = 400072;
         allowHtml = true;
-        sslCert = "${config.security.acme.certs."rababou.ch".directory}/fullchain.pem";
-        sslKey = "${config.security.acme.certs."rababou.ch".directory}/key.pem";
+        tls = {
+          certPath = "${config.security.acme.certs."rababou.ch".directory}/fullchain.pem";
+          keyPath = "${config.security.acme.certs."rababou.ch".directory}/key.pem";
+          caPath = "${config.security.acme.certs."rababou.ch".directory}/chain.pem";
+        };
         extraConfig = ''
           channelname=.+
           username=.+

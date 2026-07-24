@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   pkgs-unstable,
   ...
 }:
@@ -88,13 +87,13 @@
             extraConfig = ''
               client_max_body_size 50m;
 
-              access_log /var/log/nginx/cinny.access.log;
-              error_log /var/log/nginx/cinny.error.log;
+              access_log /var/log/nginx/sable.access.log;
+              error_log /var/log/nginx/sable.error.log;
 
               # Dont break site reload since it's an SPA
               try_files $uri $uri/ /index.html;
             '';
-            root = pkgs.cinny.override {
+            root = pkgs-unstable.sable.override {
               conf = {
                 defaultHomeserver = 0;
                 homeserverList = [

@@ -101,7 +101,7 @@
                 ];
                 allowCustomHomeservers = false;
                 featuredCommunities = {
-                  openAsDefault = false;
+                  openAsDefault = true;
                   spaces = [
                     "#community:rababou.ch"
                   ];

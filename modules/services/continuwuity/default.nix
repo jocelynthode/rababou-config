@@ -110,6 +110,9 @@
                   enabled = false;
                   basename = "/";
                 };
+                settingsDefaults = {
+                  hour24Clock = true;
+                };
               };
             };
           };

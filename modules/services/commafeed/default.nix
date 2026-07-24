@@ -1,8 +1,25 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
+let
+  commafeed-postgresql = pkgs.commafeed.overrideMavenAttrs (oldAttrs: {
+    mvnParameters = oldAttrs.mvnParameters + " -Ppostgresql";
+    # To find it, replace by lib.fakeHash and run nix build .#nixosConfigurations.rababou.config.services.commafeed.package
+    # mvhHash = lib.fakeHash;
+    mvnHash = "sha256-0zqGvSMkCdPp4Jg5tfH9qrODzkhMi22xVWx4Yq1J6vs=";
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/bin $out/share
+      unzip -d $out/share/ commafeed-server/target/commafeed-${oldAttrs.version}-postgresql-jvm.zip
+      makeWrapper ${oldAttrs.mvnJdk}/bin/java $out/bin/commafeed \
+        --add-flags "-jar $out/share/commafeed-${oldAttrs.version}-postgresql/quarkus-run.jar"
+      runHook postInstall
+    '';
+  });
+in
 {
   options.aspects.services.commafeed.enable = lib.mkEnableOption "commafeed";
 
@@ -23,6 +40,7 @@
 
       commafeed = {
         enable = true;
+        package = commafeed-postgresql;
         environment = {
           QUARKUS_HTTP_PORT = "8082";
           QUARKUS_DATASOURCE_DB_KIND = "postgresql";

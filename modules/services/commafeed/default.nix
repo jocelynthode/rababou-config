@@ -25,6 +25,7 @@
         enable = true;
         environment = {
           QUARKUS_HTTP_PORT = "8082";
+          QUARKUS_DATASOURCE_DB_KIND = "postgresql";
           # See https://github.com/Athou/commafeed/issues/1278#issuecomment-4966021207 for why we cant use unix socket
           # QUARKUS_DATASOURCE_JDBC_URL = "jdbc:postgresql:///commafeed?host=/run/postgresql";
           QUARKUS_DATASOURCE_JDBC_URL = "jdbc:postgresql://localhost:5432/commafeed";

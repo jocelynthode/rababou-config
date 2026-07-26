@@ -226,6 +226,7 @@
               "*" = "relay";
               "rababou.ch" = "user";
               "@conduit:rababou.ch" = "admin";
+              "@tekila:rababou.ch" = "admin";
             };
           };
         };

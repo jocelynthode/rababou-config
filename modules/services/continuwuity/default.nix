@@ -185,6 +185,24 @@
           };
         };
       };
+
+      mautrix-discord = {
+        enable = true;
+        settings = {
+          homeserver = {
+            address = "http://localhost:${config.services.matrix-continuwuity.settings.global.port}";
+            domain = config.services.matrix-continuwuity.settings.global.server_name;
+          };
+
+          bridge = {
+            permissions = {
+              "*" = "relay";
+              "domain" = "user";
+              "@conduit:rababou.ch" = "admin";
+            };
+          };
+        };
+      };
     };
 
     aspects.services.acme.certDomains = [

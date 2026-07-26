@@ -188,22 +188,54 @@
 
       mautrix-discord = {
         enable = true;
+        # environmentFile = config.sops.secrets.mautrixDiscord.path;
         settings = {
+          # env_config_prefix = "MAUTRIX_DISCORD_";
           homeserver = {
-            address = "http://localhost:${config.services.matrix-continuwuity.settings.global.port}";
+            address = "http://localhost:${toString config.services.matrix-continuwuity.settings.global.port}";
             domain = config.services.matrix-continuwuity.settings.global.server_name;
           };
 
           bridge = {
+            # double_puppet_server_map = {
+            #   "rababou.ch" = "http://127.0.0.1:6167";
+            # };
+            # double_puppet_allow_discovery = false;
+            backfill = {
+              forward_limits = {
+                # Initial backfill (when creating portal). 0 means backfill is disabled.
+                # A special unlimited value is not supported, you must set a limit. Initial backfill will
+                # fetch all messages first before backfilling anything, so high limits can take a lot of time.
+                initial = {
+                  dm = 10;
+                  channel = 10;
+                  thread = 10;
+                };
+                # Missed message backfill (on startup).
+                # 0 means backfill is disabled, -1 means fetch all messages since last bridged message.
+                # When using unlimited backfill (-1), messages are backfilled as they are fetched.
+                # With limits, all messages up to the limit are fetched first and backfilled afterwards.
+                missed = {
+                  dm = -1;
+                  channel = -1;
+                  thread = -1;
+                };
+              };
+            };
             permissions = {
               "*" = "relay";
-              "domain" = "user";
+              "rababou.ch" = "user";
               "@conduit:rababou.ch" = "admin";
             };
           };
         };
       };
     };
+
+    # For mautrix-discord
+    nixpkgs.config.permittedInsecurePackages = [
+      "olm-3.2.16"
+    ];
 
     aspects.services.acme.certDomains = [
       "matrix.rababou.ch"
@@ -217,6 +249,12 @@
         restartUnits = [
           "livekit.service"
           "lk-jwt-service.service"
+        ];
+      };
+      mautrixDiscord = {
+        sopsFile = ../../../secrets/${config.networking.hostName}/secrets.yaml;
+        restartUnits = [
+          "mautrix-discord.service"
         ];
       };
     };

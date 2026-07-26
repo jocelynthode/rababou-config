@@ -188,19 +188,22 @@
 
       mautrix-discord = {
         enable = true;
-        # environmentFile = config.sops.secrets.mautrixDiscord.path;
+        environmentFile = config.sops.secrets.mautrixDoublePuppet.path;
         settings = {
-          # env_config_prefix = "MAUTRIX_DISCORD_";
           homeserver = {
             address = "http://localhost:${toString config.services.matrix-continuwuity.settings.global.port}";
             domain = config.services.matrix-continuwuity.settings.global.server_name;
           };
 
           bridge = {
-            # double_puppet_server_map = {
-            #   "rababou.ch" = "http://127.0.0.1:6167";
-            # };
-            # double_puppet_allow_discovery = false;
+            double_puppet_server_map = {
+              "rababou.ch" = "http://127.0.0.1:6167";
+            };
+            double_puppet_allow_discovery = false;
+            login_shared_secret_map = {
+              # Substituted by mautrix-discord-registration.service when building config.yaml
+              "rababou.ch" = "as_token:$MAUTRIX_DOUBLEPUPPET";
+            };
             backfill = {
               forward_limits = {
                 # Initial backfill (when creating portal). 0 means backfill is disabled.
@@ -252,9 +255,10 @@
           "lk-jwt-service.service"
         ];
       };
-      mautrixDiscord = {
+      mautrixDoublePuppet = {
         sopsFile = ../../../secrets/${config.networking.hostName}/secrets.yaml;
         restartUnits = [
+          "mautrix-discord-registration.service"
           "mautrix-discord.service"
         ];
       };

@@ -9,7 +9,7 @@ let
     mvnParameters = oldAttrs.mvnParameters + " -Ppostgresql";
     # To find it, replace by lib.fakeHash and run nix build .#nixosConfigurations.rababou.config.services.commafeed.package
     # mvhHash = lib.fakeHash;
-    mvnHash = "sha256-0zqGvSMkCdPp4Jg5tfH9qrODzkhMi22xVWx4Yq1J6vs=";
+    mvnHash = "sha256-muLqn39njSLH8zx+DetU3T612YtpJl7vCppKyaC0yzQ=";
     installPhase = ''
       runHook preInstall
       mkdir -p $out/bin $out/share
